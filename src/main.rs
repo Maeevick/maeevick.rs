@@ -10,6 +10,8 @@ fn App() -> Html {
             <div>
                 <iframe src="https://maeevick.substack.com/embed" width="480" height="320"></iframe>
             </div>
+
+            <footer>{"Made with ❤️ with Rust!"}</footer>
         </main>
     }
 }
