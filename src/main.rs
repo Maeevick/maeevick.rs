@@ -4,7 +4,7 @@ use yew::prelude::*;
 fn App() -> Html {
     html! {
         <main class="min-h-screen flex flex-col items-center">
-            <h1 class="text-4xl text-center m-20">{ "Atteint ton " } <strong>{ "Product Market Fit" }</strong>{" avec "}<strong>{"fluidité"}</strong>{" et "}<strong>{"sérénité"}</strong>{" !" }</h1>
+            <h1 class="text-4xl text-center m-20">{ "Atteins ton " } <strong>{ "Product Market Fit" }</strong>{" avec "}<strong>{"fluidité"}</strong>{" et "}<strong>{"sérénité"}</strong>{" !" }</h1>
             <em class="text-xl text-center my-20">{"A venir... en attendant abonnes-toi à la newsletter 👇"}</em>
 
             <div>
