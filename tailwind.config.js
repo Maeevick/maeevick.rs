@@ -5,7 +5,11 @@ module.exports = {
     },
     darkMode: "media",
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'maeevick-orange': '#ff6100',
+            },
+        },
     },
     variants: {
         extend: {},
