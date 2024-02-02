@@ -26,7 +26,7 @@ jobs:
     - name: Build Deps
       run: |
         rustup target add wasm32-unknown-unknown
-        cargo install --locked trunk
+        cargo install --locked --force trunk
         cargo build --verbose
         cargo test --verbose
     - name: Build App
