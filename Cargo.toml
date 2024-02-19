@@ -3,8 +3,15 @@ name = "maeevick"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "maeevick"
+path = "src/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-yew = { git = "https://github.com/yewstack/yew/", features = ["csr"] }
-yew-router = { git = "https://github.com/yewstack/yew.git" }
+actix-web = "4"
+actix-files = "0.6.5"
+futures = "0.3.30"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

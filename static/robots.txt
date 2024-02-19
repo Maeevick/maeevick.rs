@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: http://maeevick.com/sitemap.xml
+Sitemap: http://www.maeevick.com/static/sitemap.xml

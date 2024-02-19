@@ -10,12 +10,12 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  app_build_and_deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
-        working-directory: ./app
+        working-directory: ./maeevick
     steps:
     - uses: actions/checkout@v4
     - uses: actions/cache@v4
@@ -27,43 +27,30 @@ jobs:
           ~/.cargo/git/db/
           target/
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - name: Build Deps
-      run: |
-        rustup target add wasm32-unknown-unknown
-        cargo install --locked --force trunk
-        cargo build --verbose
-        cargo test --verbose
-    - name: Build App
-      run: trunk build --release --verbose
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: maeevick/webserver:latest
     - name: Deploy
-      uses: burnett01/rsync-deployments@6.0.0
+      uses: appleboy/ssh-action@v1.0.3
       with:
-        switches: -avzr --delete
-        path: app/dist/
-        remote_path: ${{ secrets.TARGET }}
-        remote_host: ${{ secrets.HOST }}
-        remote_port: ${{ secrets.PORT }}
-        remote_user: ${{ secrets.USERNAME }}
-        remote_key: ${{ secrets.KEY }}
-        remote_key_pass: ${{ secrets.PASSPHRASE }}
-  api_build_and_deploy:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./api
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/cache@v4
-      with:
-        path: |
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          target/
-        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-    - name: Build Deps
-      run: |
-        cargo build --verbose
-        cargo test --verbose
+        host: ${{ secrets.HOST }}
+        port  : ${{ secrets.PORT }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        script: |
+          cd ${{ secrets.TARGET }} 
+          docker compose down
+          sudo docker system prune -af
+          docker compose up -d --build
