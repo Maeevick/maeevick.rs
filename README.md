@@ -1,12 +1,16 @@
 # Experimental maeevick.com with Rust
 
-I (re)build my website with Rust an experiment with its ecosystem
+I (re)build my website with Rust an experiment with its ecosystem!
 
-I test several ways.
+I test several ways. It's so fun!
 
-## Core Tools 
-- [x] HTML5 : basic.
-- [x] CSS with Tailwind: need some Trunk's config and/or NPX but stays my favorite CSS tool.
-- [x] Github Actions: Keep it simple regarding the project nature (website) and the complexity (none).
+## Core Stack and Tools
+- [x] HTML5 : some basic HTML pages.
+- [x] CSS with Tailwind: powerfull atomic css toolbet (pre-compiled in docker or with `run.sh` and `cargo watch`).
+- [x] JS script: a simple _Service Worker implementation_ to handle offline on mobile.
+- [x] __Rust: it's the core of this project -> experiment and learn.__
 
-- [x] Actix-Web: API and Web Server development
+- [X] Docker, DockerHub and docker-compose: to build a secure and light binary and keep stuff simple.
+- [x] Github Actions: keep it simple regarding the project nature (website) and the complexity (none).
+
+- [x] Actix-Web: API and Web Server development.

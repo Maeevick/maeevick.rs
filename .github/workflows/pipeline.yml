@@ -50,7 +50,9 @@ jobs:
         key: ${{ secrets.KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-          cd ${{ secrets.TARGET }} 
+          cd ${{ secrets.TARGET }}
+          rm docker-compose.yml
+          echo "${{ secrets.DOCKER_COMPOSE }}" >> docker-compose.yml
           docker compose down
           sudo docker system prune -af
           docker compose up -d --build
